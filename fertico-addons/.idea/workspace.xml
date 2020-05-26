@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="89feab26-d613-43d6-b2aa-238d056821b9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__manifest__.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1arsNxE8Q6ipR7jcP5KsIT1mp6V" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89feab26-d613-43d6-b2aa-238d056821b9" name="Default Changelist" comment="" />
+      <created>1587505011128</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587505011128</updated>
+    </task>
+    <task id="LOCAL-00001" summary="[FIX] Cambios hechos al manifiesto de Fertico">
+      <created>1587505925105</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587505925106</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[ERR] Cambios hechos al manifiesto de Fertico">
+      <created>1587506306763</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1587506306763</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[FIX] Dejando versión estable">
+      <created>1587507392776</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587507392776</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[FIX] Cambios hechos al manifiesto de Fertico" />
+    <MESSAGE value="[ERR] Cambios hechos al manifiesto de Fertico" />
+    <MESSAGE value="[FIX] Dejando versión estable" />
+    <option name="LAST_COMMIT_MESSAGE" value="[FIX] Dejando versión estable" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="803" y="339" width="304" height="321" key="#Notifications" timestamp="1587736793136">
+      <screen x="0" y="27" width="1920" height="940" />
+    </state>
+    <state x="803" y="339" width="304" height="321" key="#Notifications/0.27.1920.940@0.27.1920.940" timestamp="1587736793136" />
+    <state x="406" y="27" width="1098" height="940" key="CommitChangelistDialog2" timestamp="1587507392620">
+      <screen x="0" y="27" width="1920" height="940" />
+    </state>
+    <state x="406" y="27" width="1098" height="940" key="CommitChangelistDialog2/0.27.1920.940@0.27.1920.940" timestamp="1587507392620" />
+    <state x="454" y="169" width="1002" height="662" key="Vcs.Push.Dialog.v2" timestamp="1587507407561">
+      <screen x="0" y="27" width="1920" height="940" />
+    </state>
+    <state x="454" y="169" width="1002" height="662" key="Vcs.Push.Dialog.v2/0.27.1920.940@0.27.1920.940" timestamp="1587507407561" />
+  </component>
+</project>
