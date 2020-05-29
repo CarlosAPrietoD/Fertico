@@ -5,6 +5,7 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     estimated_sale=fields.Float(string='Estimated Sale Price', compute='_compute_sale')
+    price_cost=fields.Float(string='Price Cost', compute='_compute_sale')
 
     @api.multi
     @api.depends('qty_at_date')
@@ -12,6 +13,9 @@ class ProductProduct(models.Model):
         #calculate the estimated sale price for valuation
         for prod in self:
             prod.estimated_sale=prod.list_price*prod.qty_at_date
+            prod.price_cost=prod.stock_value/prod.qty_at_date
+    
+    
 
 
 

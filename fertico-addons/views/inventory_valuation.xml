@@ -28,7 +28,7 @@
                 <field name="name"/>
                 <field name="qty_at_date"/>
                 <field name="list_price"/>
-                <field name="standard_price"/>
+                <field name="price_cost"/>
                 <field name="categ_id"/>
                 <field name="type"/>
                 <field name="uom_id" groups="product.group_uom"/>
