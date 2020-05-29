@@ -30,6 +30,7 @@
         'security/analytic_security.xml',
         'security/sales_security.xml',
         'security/ir.model.access.csv',
+        'security/valuation_security.xml',
 
         # views
         'views/views.xml',
@@ -39,7 +40,7 @@
         'views/sales_chanel.xml',
         'views/block_sales_price.xml',
         'views/pos_init.xml',
-        'views/inventory_valuation.xml'
+        'views/inventory_valuation.xml',
 
 
         # reports

@@ -51,5 +51,5 @@
         <field name="context">{'default_compute_at_date': 0}</field>
     </record>
 
-    <menuitem id="menu_valuation" name="Inventory Valuation Management" parent="stock.menu_warehouse_report" sequence="120" action="action_stock_quantity_history_manager"/>
+    <menuitem id="menu_valuation" name="Inventory Valuation Management" parent="stock.menu_warehouse_report" sequence="120" action="action_stock_quantity_history_manager" groups="fertico-addons.group_valuate_report"/>
 </odoo>
