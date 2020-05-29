@@ -13,7 +13,16 @@
     'version': '11.0.1.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'analytic', 'account', 'hr', 'hr_attendance', 'sale', 'point_of_sale', 'pos_sale'],
+    'depends': [
+        'base', 
+        'analytic', 
+        'account', 
+        'hr', 
+        'hr_attendance', 
+        'sale', 
+        'point_of_sale', 
+        'pos_sale',
+        'stock'],
 
     # always loaded
     'data': [
@@ -29,7 +38,8 @@
         'views/attendances.xml',
         'views/sales_chanel.xml',
         'views/block_sales_price.xml',
-        'views/pos_init.xml'
+        'views/pos_init.xml',
+        'views/inventory_valuation.xml'
 
 
         # reports

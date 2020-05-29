@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_quantity_history_manager" model="ir.ui.view">
+        <field name="name">Inventory Report</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="arch" type="xml">
+            <form string="Choose your date">
+                <group>
+                    <group>
+                        <field name="compute_at_date" widget="radio"/>
+                        <field name="date" attrs="{'invisible': [('compute_at_date', '=', 0)]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="open_table_manager" string="Retrieve the Inventory Quantities" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stock_manager_tree" model="ir.ui.view">
+        <field name="name">product.stock.manager.tree</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="default_code"/>
+                <field name="name"/>
+                <field name="qty_at_date"/>
+                <field name="list_price"/>
+                <field name="standard_price"/>
+                <field name="categ_id"/>
+                <field name="type"/>
+                <field name="uom_id" groups="product.group_uom"/>
+                <field name="cost_currency_id" invisible="1"/>
+                <field name="estimated_sale"/>
+                <field name="stock_value" sum="Stock Valuation" widget="monetary" options="{'currency_field': 'cost_currency_id'}"/>
+                <field name="cost_method" invisible="1"/>
+                <button name="action_valuation_at_date_details" type="object" icon="fa-info-circle" attrs="{'invisible': [('cost_method', '!=', 'fifo')]}" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_quantity_history_manager" model="ir.actions.act_window">
+        <field name="name">Inventory Report</field>
+        <field name="res_model">stock.quantity.history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_stock_quantity_history_manager"/>
+        <field name="target">new</field>
+        <field name="context">{'default_compute_at_date': 0}</field>
+    </record>
+
+    <menuitem id="menu_valuation" name="Inventory Valuation Management" parent="stock.menu_warehouse_report" sequence="120" action="action_stock_quantity_history_manager"/>
+</odoo>
