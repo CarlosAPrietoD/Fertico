@@ -19,6 +19,42 @@ class AccountAnalyticTag(models.Model):
 
     active_analytic_distribution = fields.Boolean('Analytic Distribution')
     analytic_distribution_ids = fields.One2many('account.analytic.distribution', 'tag_id', string="Analytic Accounts")
+    tag_type = fields.Selection([
+        ('travel', 'Viaje'),
+        ('route', 'Ruta'),           
+        ('operator', 'Operador'),
+    ], string="Type")
+
+class AccountAnalyticLine(models.Model):
+    _inherit = "account.analytic.line"
+
+
+    def get_travel(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'travel':
+                    line.travel=tag.id
+
+    def get_route(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'route':
+                    line.route=tag.id
+
+    def get_operator(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'operator':
+                    line.operator=tag.id
+
+
+    travel=fields.Many2one('account.analytic.tag', compute=get_travel, string='Travel')
+    route=fields.Many2one('account.analytic.tag', compute=get_route, string='Route')
+    operator=fields.Many2one('account.analytic.tag', compute=get_operator, string='Operator')
+
+
+
+
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
