@@ -28,19 +28,23 @@ class AccountAnalyticTag(models.Model):
 class AccountAnalyticLine(models.Model):
     _inherit = "account.analytic.line"
 
-
+    @api.depends('tag_ids')
     def get_travel(self):
         for line in self:
             for tag in line.tag_ids:
                 if tag.tag_type == 'travel':
                     line.travel=tag.id
+        
 
+    @api.depends('tag_ids')
     def get_route(self):
         for line in self:
             for tag in line.tag_ids:
                 if tag.tag_type == 'route':
                     line.route=tag.id
 
+
+    @api.depends('tag_ids')
     def get_operator(self):
         for line in self:
             for tag in line.tag_ids:
@@ -48,9 +52,9 @@ class AccountAnalyticLine(models.Model):
                     line.operator=tag.id
 
 
-    travel=fields.Many2one('account.analytic.tag', compute=get_travel, string='Travel')
-    route=fields.Many2one('account.analytic.tag', compute=get_route, string='Route')
-    operator=fields.Many2one('account.analytic.tag', compute=get_operator, string='Operator')
+    travel=fields.Many2one('account.analytic.tag', compute=get_travel, string='Travel', store=True)
+    route=fields.Many2one('account.analytic.tag', compute=get_route, string='Route', store=True)
+    operator=fields.Many2one('account.analytic.tag', compute=get_operator, string='Operator', store=True)
 
 
 

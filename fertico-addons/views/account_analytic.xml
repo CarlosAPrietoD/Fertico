@@ -36,7 +36,7 @@
             <field name="inherit_id" ref="analytic.view_account_analytic_line_tree"></field>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='account_id']" position="after">
-                    <field name="tag_ids"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
                 </xpath>
                 <xpath expr="//field[@name='tag_ids']" position="after">
                     <field name="travel" />
