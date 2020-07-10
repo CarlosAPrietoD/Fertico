@@ -1,7 +1,7 @@
 <odoo>
-  <data>
-  
-    <record id="account_analytic_tag_form" model="ir.ui.view">
+    <data>
+
+        <record id="account_analytic_tag_form" model="ir.ui.view">
             <field name="model">account.analytic.tag</field>
             <field name="inherit_id" ref="analytic.account_analytic_tag_form_view"></field>
             <field name="arch" type="xml">
@@ -10,8 +10,7 @@
                         <group>
                             <field name="active_analytic_distribution" groups="fertico-addons.group_analytic_distribution"/>
                         </group>
-                        <field name="analytic_distribution_ids" nolabel="1" widget="one2many_list"
-                            attrs="{'invisible': [('active_analytic_distribution', '=', False)]}">
+                        <field name="analytic_distribution_ids" nolabel="1" widget="one2many_list" attrs="{'invisible': [('active_analytic_distribution', '=', False)]}">
                             <tree string="Analytic Distribution" editable="bottom">
                                 <field name="account_id"/>
                                 <field name="percentage"/>
@@ -22,5 +21,30 @@
             </field>
         </record>
 
-  </data>
+        <record id="account_analytic_tags_type" model="ir.ui.view">
+            <field name="model">account.analytic.tag</field>
+            <field name="inherit_id" ref="analytic.account_analytic_tag_form_view"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="tag_type"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_analytic_tags_list" model="ir.ui.view">
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_line_tree"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='account_id']" position="after">
+                    <field name="tag_ids"/>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="travel" />
+                    <field name="route" />
+                    <field name="operator" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
 </odoo>
