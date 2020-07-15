@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+import xml.etree.ElementTree as ET
+import base64
 
 class AccountAnalyticDistribution(models.Model):
     _name = 'account.analytic.distribution'
@@ -62,6 +64,15 @@ class AccountAnalyticLine(models.Model):
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
+
+    xml_file=fields.Binary(string='XML File')
+    file_name = fields.Char("File Name")
+    complement_file = fields.Binary(string='XML Complement')
+    complement_file_name = fields.Char("File Name")
+    complement = fields.Boolean()
+    complement_check = fields.Boolean(string="Need a complement")
+    complement_done = fields.Boolean()
+    complement_done_check = fields.Boolean(string="Complement done")
 
     def action_move_create(self):
         res= super(AccountInvoice, self).action_move_create()
@@ -127,3 +138,87 @@ class AccountInvoice(models.Model):
                         record = self.env['account.analytic.line'].create(vals)
 
         return res
+
+
+
+    def read_xml(self, file):
+        
+        x_file=base64.decodestring(str.encode(file)).decode("utf-8")
+        index=x_file.find('"PPD"')
+        if index != -1:
+            return True
+        else:
+            return False
+
+    def read_comp(self, file):
+        x_file=base64.decodestring(str.encode(file)).decode("utf-8")
+        index=x_file.find('"P"')
+        if index != -1:
+            return True
+        else:
+            return False
+
+
+    @api.multi
+    @api.onchange('xml_file')
+    def _onchange_file(self):
+        if self.xml_file:
+            if self.read_xml(self.xml_file):
+                self.complement=True
+            else:
+                self.complement=False
+        else:
+            self.complement=False
+            
+
+    @api.multi
+    @api.onchange('complement')
+    def _onchange_comp(self):
+        if self.complement:
+            self.complement_check=True
+        else:
+            self.complement_check=False
+            self.complement_file=None
+    
+    @api.multi
+    @api.onchange('complement_check')
+    def _onchange_com_ch(self):
+        if self.complement:
+            self.complement_check=True
+        else:
+            self.complement_check=False
+
+    @api.multi
+    @api.onchange('complement_file')
+    def _onchange_file_comp(self):
+        if self.complement_file:
+            if self.read_comp(self.complement_file):
+                self.complement_done=True
+            else:
+                self.complement_done=False
+                self.complement_file=None
+                res = {'warning': {
+                        'title': 'Error de complemento',
+                        'message': 'El archivo seleccionado no es un complemento'}}
+                return res
+        else:
+            self.complement_done=False
+
+    @api.multi
+    @api.onchange('complement_done')
+    def _onchange_comp_done(self):
+        if self.complement_done:
+            self.complement_done_check=True
+        else:
+            self.complement_done_check=False
+    
+    @api.multi
+    @api.onchange('complement_done_check')
+    def _onchange_com_ch_done(self):
+        if self.complement_done:
+            self.complement_done_check=True
+        else:
+            self.complement_done_check=False
+
+
+       

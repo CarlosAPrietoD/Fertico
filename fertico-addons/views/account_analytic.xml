@@ -46,5 +46,24 @@
             </field>
         </record>
 
+        <record id="account_xml_view" model="ir.ui.view">
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="xml_file"  filename="file_name"/>
+                    <field name="file_name" invisible="1"/>
+                    <field name="complement" invisible="1"/>
+                    <field name="complement_check"/>
+                    <field name="complement_file" filename="complement_file_name" attrs="{'invisible': [('complement', '=', False)]}"/>
+                    <field name="complement_file_name" invisible="1"/>
+                    <field name="complement_done" invisible="1"/>
+                    <field name="complement_done_check" attrs="{'invisible': [('complement', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//button" position="after">
+                    <button name="read_xml" string="Read XML" type="object"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
