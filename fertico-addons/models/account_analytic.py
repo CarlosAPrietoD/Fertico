@@ -140,10 +140,12 @@ class AccountInvoice(models.Model):
         return res
 
 
-
+    #Este metodo recibe el archivo en tipo string
     def read_xml(self, file):
-        
+        #convertimos el string en un archivo de tipo bytes
+        #decodificamos el archivo para leer su contenido
         x_file=base64.decodestring(str.encode(file)).decode("utf-8")
+        #hacemos una busqueda dentro del contenido segun lo que necesitemos comparar
         index=x_file.find('"PPD"')
         if index != -1:
             return True
@@ -162,8 +164,11 @@ class AccountInvoice(models.Model):
     @api.multi
     @api.onchange('xml_file')
     def _onchange_file(self):
+        #detectamos los cambios hechos en el archivo
+        #si se agrega un archivo nuevo, lo pasamos a lectura para saber si necesita complemento
         if self.xml_file:
             if self.read_xml(self.xml_file):
+                #Si necesita de un complemento activamos el check-box de complemento
                 self.complement=True
             else:
                 self.complement=False
