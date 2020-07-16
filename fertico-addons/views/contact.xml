@@ -1,0 +1,26 @@
+<odoo>
+    <!--====================Unificar contactos=======================-->
+    <record model="ir.ui.view" id="wizard_contact_form_views">
+        <field name="name">wizard.contact.form</field>
+        <field name="model">contact.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Unify contacts">
+                <group>
+                    <field name="contact"/>
+                </group>
+                <footer>
+                    <button name="unify_contact" type="object" string="Submit" class="oe_highlight"></button>
+                </footer>
+            </form>
+        </field>        
+    </record>
+
+    <act_window id="launch_contact_wizard"
+                name="Unify contacts"
+                src_model="res.partner"
+                res_model="contact.wizard"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"/>
+
+</odoo>

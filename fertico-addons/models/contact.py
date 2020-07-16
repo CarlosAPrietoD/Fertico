@@ -57,4 +57,15 @@ class ResPartner(models.Model):
 
         return contact
         
+#==============================Unificar contactos==================================
+
+class ContactWizard(models.TransientModel):
+    _name = "contact.wizard"
+
+    contact=fields.Many2one('res.partner', string="Contact to unify")
+
+    def unify_contact(self):
+        active_id = self._context('active_ids')
         
+        print("===========actual",active_id)
+        print("==============a unificar",self.contact)
