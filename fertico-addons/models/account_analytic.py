@@ -19,6 +19,44 @@ class AccountAnalyticTag(models.Model):
 
     active_analytic_distribution = fields.Boolean('Analytic Distribution')
     analytic_distribution_ids = fields.One2many('account.analytic.distribution', 'tag_id', string="Analytic Accounts")
+#=====================================add type on analytic tags======================================================
+    tag_type = fields.Selection([
+        ('travel', 'Viaje'),
+        ('route', 'Ruta'),           
+        ('operator', 'Operador'),
+    ], string="Type")
+
+class AccountAnalyticLine(models.Model):
+    _inherit = "account.analytic.line"
+
+    @api.depends('tag_ids')
+    def get_travel(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'travel':
+                    line.travel=tag.id
+        
+
+    @api.depends('tag_ids')
+    def get_route(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'route':
+                    line.route=tag.id
+
+
+    @api.depends('tag_ids')
+    def get_operator(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'operator':
+                    line.operator=tag.id
+
+
+    travel=fields.Many2one('account.analytic.tag', compute=get_travel, string='Travel', store=True)
+    route=fields.Many2one('account.analytic.tag', compute=get_route, string='Route', store=True)
+    operator=fields.Many2one('account.analytic.tag', compute=get_operator, string='Operator', store=True)
+#===================================End of type in analytic tags============================================
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
