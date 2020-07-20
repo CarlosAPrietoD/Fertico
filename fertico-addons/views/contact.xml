@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form string="Unify contacts">
                 <group>
-                    <field name="contact"/>
+                    <field name="contact" widget="selection"/>
                 </group>
                 <footer>
                     <button name="unify_contact" type="object" string="Submit" class="oe_highlight"></button>
