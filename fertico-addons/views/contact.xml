@@ -6,21 +6,20 @@
         <field name="arch" type="xml">
             <form string="Unify contacts">
                 <group>
-                    <field name="contact" widget="selection"/>
+                    <group>
+                        <field name="contact" widget="many2onebutton"/>
+                    </group>
+                    <group>
+                        <field name="image" widget="image" nolabel="1"/>
+                    </group>
                 </group>
                 <footer>
-                    <button name="unify_contact" type="object" string="Submit" class="oe_highlight"></button>
+                    <button name="unify_contact" type="object" string="Unify" class="oe_highlight"></button>
                 </footer>
             </form>
-        </field>        
+        </field>
     </record>
 
-    <act_window id="launch_contact_wizard"
-                name="Unify contacts"
-                src_model="res.partner"
-                res_model="contact.wizard"
-                view_mode="form"
-                target="new"
-                key2="client_action_multi"/>
+    <act_window id="launch_contact_wizard" name="Unify contacts" src_model="res.partner" res_model="contact.wizard" view_mode="form" target="new" key2="client_action_multi"/>
 
 </odoo>

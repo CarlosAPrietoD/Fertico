@@ -63,6 +63,7 @@ class ContactWizard(models.TransientModel):
     _name = "contact.wizard"
     #En un wizard pedimos el contacto que se va a eliminar
     contact=fields.Many2one('res.partner', string="Contact to delete")
+    image=fields.Binary(related='contact.image')
 
     def unify_contact(self):
         #recuperamos los 2 contactos con los que vamos a trabajar
