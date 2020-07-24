@@ -36,6 +36,7 @@
         'views/domain_terms.xml',
         'views/account_invoice_correction.xml',
         'views/account_reconcile.xml',
+        'views/contact.xml',
 
         # reports
         'reports/custom_layout.xml',
