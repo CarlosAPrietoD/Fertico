@@ -37,6 +37,7 @@
         'views/account_invoice_correction.xml',
         'views/account_reconcile.xml',
         'views/contact.xml',
+        'views/purchase_lines.xml',
 
         # reports
         'reports/custom_layout.xml',
