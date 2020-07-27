@@ -24,6 +24,7 @@
             </xpath>
         </field>
     </record>
+    
 
     <!--========================Menu que manda a la accion para abrir la vista de arbol========================-->
     <menuitem id="menu_purchase_line" name="Purchase order lines" parent="purchase.purchase_report" action="purchase_list_action"/>
