@@ -32,8 +32,6 @@ class AccountPartialReconcile(models.Model):
     final = fields.Float(string="Saldo final", compute='get_paid')
     #Campos relacionados
     total = fields.Monetary(related='debit_move_id.invoice_id.amount_total')
-    total_purchase = fields.Monetary(related='credit_move_id.invoice_id.amount_total')
-    
     invoice = fields.Many2one(related='debit_move_id.invoice_id', store=True)
     customer = fields.Many2one(string="Customer", related='debit_move_id.invoice_id.partner_id', store=True)
     account = fields.Many2one(string="Account", related='debit_move_id.invoice_id.account_id')
