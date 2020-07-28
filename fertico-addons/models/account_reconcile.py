@@ -42,5 +42,4 @@ class AccountPartialReconcile(models.Model):
     invoice_pur = fields.Many2one(related='credit_move_id.invoice_id', store=True)
     customer_purchase = fields.Many2one(string="Vendor", related='credit_move_id.invoice_id.partner_id', store=True)
     account_purchase = fields.Many2one(string="Account", related='credit_move_id.invoice_id.account_id')
-    account_type_purchase = fields.Selection(related='credit_move_id.invoice_id.account_id.user_type_id.type')
-    
+    account_type_purchase = fields.Selection(related='credit_move_id.invoice_id.account_id.user_type_id.type')    
