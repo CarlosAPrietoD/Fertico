@@ -13,9 +13,9 @@
                 <field name="account"/>
                 <field name="account_type"/>
                 <field name="create_date" string="Date"/>
-                <field name="incial"/>
+                <!--<field name="incial"/>
                 <field name="amount"/>
-                <field name="final"/>
+                <field name="final"/>-->
             </tree>
         </field>
     </record>
@@ -57,9 +57,9 @@
                 <field name="account_purchase"/>
                 <field name="account_type_purchase"/>
                 <field name="create_date" string="Date"/>
-                <field name="incial"/>
+                <!--<field name="incial"/>
                 <field name="amount"/>
-                <field name="final"/>
+                <field name="final"/>-->
             </tree>
         </field>
     </record>

@@ -33,8 +33,8 @@ class AccountPartialReconcile(models.Model):
                 
 
     #Campos calculados
-    incial = fields.Float(string="Saldo inicial", compute='get_paid')
-    final = fields.Float(string="Saldo final", compute='get_paid')
+    #incial = fields.Float(string="Saldo inicial", compute='get_paid')
+    #final = fields.Float(string="Saldo final", compute='get_paid')
     
     #Campos relacionados de ventas
     total = fields.Monetary(related='debit_move_id.invoice_id.amount_total')
