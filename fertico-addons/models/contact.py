@@ -58,4 +58,23 @@ class ResPartner(models.Model):
 
         return contact
         
+
+    #===================================Calcular limite restante=================================
+
+    @api.depends('credit_limit')
+    def _get_limit(self):
+        invoices = self.env['account.invoice'].search(['&','&',('partner_id', '=', self.id),('type', '=', 'out_invoice'),('state', '=', 'open')])
+        credit=self.credit_limit
+        total=0
+        
+        for invoice in invoices:
+            total+=invoice.amount_total
+            credit-=invoice.amount_total
+        
+        self.limit_consumed=total
+        self.limit_available=credit
+
+
+    limit_consumed = fields.Float(string="Limit consumed", compute="_get_limit")
+    limit_available = fields.Float(string="Limit available", compute="_get_limit")
         
