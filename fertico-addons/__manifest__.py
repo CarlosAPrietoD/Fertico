@@ -51,6 +51,6 @@
     ],
     # addons made to point of sale
     'qweb': [
-        'static/src/xml/pos.xml'
+        'static/src/xml/pos.xml',
      ]
 }
