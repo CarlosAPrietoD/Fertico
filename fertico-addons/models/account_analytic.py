@@ -19,6 +19,42 @@ class AccountAnalyticTag(models.Model):
 
     active_analytic_distribution = fields.Boolean('Analytic Distribution')
     analytic_distribution_ids = fields.One2many('account.analytic.distribution', 'tag_id', string="Analytic Accounts")
+    tag_type = fields.Selection([
+        ('travel', 'Viaje'),
+        ('route', 'Ruta'),           
+        ('operator', 'Operador'),
+    ], string="Type")
+
+class AccountAnalyticLine(models.Model):
+    _inherit = "account.analytic.line"
+
+
+    def get_travel(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'travel':
+                    line.travel=tag.id
+
+    def get_route(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'route':
+                    line.route=tag.id
+
+    def get_operator(self):
+        for line in self:
+            for tag in line.tag_ids:
+                if tag.tag_type == 'operator':
+                    line.operator=tag.id
+
+
+    travel=fields.Many2one('account.analytic.tag', compute=get_travel, string='Travel')
+    route=fields.Many2one('account.analytic.tag', compute=get_route, string='Route')
+    operator=fields.Many2one('account.analytic.tag', compute=get_operator, string='Operator')
+
+
+
+
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
@@ -85,5 +121,26 @@ class AccountInvoice(models.Model):
                             'product_uom_id': ml[10]
                         }
                         record = self.env['account.analytic.line'].create(vals)
-
         return res
+
+
+    @api.multi
+    @api.onchange('invoice_line_ids')
+    def _onchange_line(self):
+        if self.type == 'out_invoice':
+            for line in self.invoice_line_ids:
+                if line.sale_line_ids:
+                    line.product_id=line.sale_line_ids.product_id
+                    line.name=line.sale_line_ids.name
+                    line.quantity=line.sale_line_ids.product_uom_qty
+                    line.price_unit=line.sale_line_ids.price_unit
+
+            for line in self.invoice_line_ids:
+                if not line.sale_line_ids:
+                    if line.product_id.type == 'product':
+                        self.invoice_line_ids = [(3,line.id)]
+                        res = {'warning': {
+                            'title': 'Error de producto',
+                            'message': 'No puedes seleccionar un producto almacenable'
+                        }}
+                        return res
