@@ -16,18 +16,20 @@
     'version': '11.0.1.0.3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base',
-    'purchase'],
+    'depends': ['base', 'purchase'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'security/saldos_pendientes_grupo.xml',      
+
         'views/views.xml',
         'views/templates.xml',
         'views/reciba.xml',
         'views/cycle.xml',
         'views/purchase.xml',
         'views/modality.xml',
+        'views/saldos_pendientes.xml',      
     ],
     # only loaded in demonstration mode
     'demo': [
