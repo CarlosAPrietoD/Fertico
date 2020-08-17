@@ -7,10 +7,5 @@
             <field name="category_id" ref="base.module_category_hidden"/>
         </record>
         
-    </data>
-    
-    <data>
-        <function model="reciba.order" name="display_debts_pop_up"/>
-    </data>
-    
+    </data>    
 </odoo>
