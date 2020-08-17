@@ -8,8 +8,7 @@
             <field name="arch" type="xml">            
                 <form string="Course Form">
                     <sheet>
-                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;"
-                                attrs="{'invisible': [('state', '!=', 'sale')]}">
+                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;">
                                 This is a probe for displaying alerts
                             <bold>
                                 <a class="alert-link" role="button">
