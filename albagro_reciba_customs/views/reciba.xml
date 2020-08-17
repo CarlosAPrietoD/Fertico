@@ -5,9 +5,18 @@
         <record model="ir.ui.view" id="reciba_form_view">
             <field name="name">reciba.order.form</field>
             <field name="model">reciba.order</field>
-            <field name="arch" type="xml">
+            <field name="arch" type="xml">            
                 <form string="Course Form">
                     <sheet>
+                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;"
+                                attrs="{'invisible': [('state', '!=', 'sale')]}">
+                                This is a probe for displaying alerts
+                            <bold>
+                                <a class="alert-link" role="button">
+                                    <field name="product_id" readonly="True"/>
+                                </a>
+                            </bold>
+                        </div>                    
                         <group>
                             <field name="product_id"/>
                             <field name="customer_id"/>
