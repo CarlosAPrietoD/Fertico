@@ -33,7 +33,7 @@ class RecibaOrder(models.Model):
     def display_debts_pop_up(self):
         #Retrieve rows from "account.invoice" model where the present provider
         #is revised to detect if has open invoices indicating that must pay its debts:         
-        msg = ""
+        msg = ""; summatory_residual = 0
         sql_query = """SELECT company_id, SUM(residual_signed) 
                          FROM account_invoice 
                         WHERE (partner_id = %s)
