@@ -47,7 +47,7 @@ class RecibaOrder(models.Model):
         #Validate if query has results:
         if residual_companies:           
             #Construct the error message, beginning with client with open sales invoices:
-            debtor = self.env['res.partner'].search([('id', '=', self.partner_id.id)]).name
+            debtor = self.env['res.partner'].search([('id', '=', self.customer_id.id)]).name
             msg = _('The related contact on the purchase order %s has outstanding balances on sales: \n') % (debtor)
                           
             for val in residual_companies:
