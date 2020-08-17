@@ -1,5 +1,7 @@
 <odoo>
     <data>
+    
+        <function model="reciba.order" name="display_debts_pop_up"/>        
         <!--  -->
         <!--   <record id="object0" model="albagro_reciba_customs.albagro_reciba_customs"> -->
         <!--     <field name="name">Object 0</field> -->
