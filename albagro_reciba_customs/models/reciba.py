@@ -54,12 +54,12 @@ class RecibaOrder(models.Model):
             for val in residual_companies:
                 #Iterate companies with residual (outstanding balance) and concatenate
                 company_name = self.env['res.company'].search([('id', '=', val[0])]).name
-                msg += "<li> " + company_name + ", saldo por $" + val[1] + "</li>"                
+                msg += "<li> " + company_name + ", saldo por $" + str(val[1]) + "</li>"                
                 #Sum up residuals in order to indicate how much is debted
                 summatory_residual += val[1] 
 
             msg += "</ul>"                         
             #Concatenate last part of error message:
-            msg += "Considere efectuar descuentos"
+            msg += "<p>Considere efectuar descuentos</p>"
             self.has_debts = True
             self.error_message = msg
