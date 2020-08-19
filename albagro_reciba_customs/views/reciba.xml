@@ -9,15 +9,54 @@
                 <form string="Course Form">
                     <sheet>
                         <group>
-                            <field name="product_id"/>
-                            <field name="customer_id"/>
                             <field name="no_ticket"/>
+                            <field name="date"/>
+                            <field name="customer_id"/>
                             <field name="cycle_id"/>
-                            <field name="modality_id"/>
-                            <field name="gross_weight"/>
-                            <field name="tare_weight"/>
-                            <field name="net_weight"/>
                         </group>
+                        <notebook>
+                            <page string="Bascula">
+                                <group>
+                                    <field name="third_folio"/>
+                                    <field name="reciba_third"/>
+                                    <field name="product_id"/>
+                                    <field name="modality_id"/>
+                                    <field name="silo"/>
+                                    <field name="net_weight" string="Quantity of tons"/>
+                                </group>
+                            </page>
+                            <page string="Descuentos">
+                                <group>
+                                    <group>
+                                        <field name="percentage_humidity"/>
+                                        <field name="discount_kilos_humidity"/>
+                                        <field name="discount_humidity"/>
+                                        <field name="percentage_impurity"/>
+                                        <field name="discount_kilos_impurity"/>
+                                        <field name="discount_impurity"/>
+                                    </group>
+                                    <group>
+                                        <field name="percentage_damaged"/>
+                                        <field name="discount_kilos_damaged"/>
+                                        <field name="discount_damaged"/>
+                                        <field name="percentage_broken"/>
+                                        <field name="discount_kilos_broken"/>
+                                        <field name="discount_broken"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Bascula">
+                                <group>
+                                    <field name="operator"/>
+                                    <field name="plate"/>
+                                    <field name="gross_weight"/>
+                                    <field name="tare_weight"/>
+                                    <field name="net_weight"/>
+                                </group>
+                            </page>
+                        </notebook>
+
                     </sheet>
                 </form>
             </field>
@@ -31,13 +70,13 @@
             <field name="arch" type="xml">
                 <tree string="Course Tree">
                     <field name="product_id"/>
-                    <field name="customer_id"/>
+                    <!--<field name="customer_id"/>
                     <field name="no_ticket"/>
                     <field name="cycle_id"/>
                     <field name="modality_id"/>
                     <field name="gross_weight"/>
                     <field name="tare_weight"/>
-                    <field name="net_weight"/>
+                    <field name="net_weight"/>-->
                 </tree>
             </field>
         </record>
