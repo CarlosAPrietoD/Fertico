@@ -33,7 +33,7 @@ class RecibaOrder(models.Model):
     def display_debts_pop_up(self):
         #Retrieve rows from "account.invoice" model where the present provider
         #is revised to detect if has open invoices indicating that must pay its debts:         
-        msg = ""
+        msg = ""; summatory_residual = 0
         sql_query = """SELECT company_id, SUM(residual_signed) 
                          FROM account_invoice 
                         WHERE (partner_id = %s)
@@ -47,7 +47,7 @@ class RecibaOrder(models.Model):
         #Validate if query has results:
         if residual_companies:           
             #Construct the error message, beginning with client with open sales invoices:
-            debtor = self.env['res.partner'].search([('id', '=', self.partner_id.id)]).name
+            debtor = self.env['res.partner'].search([('id', '=', self.customer_id.id)]).name
             msg = _('The related contact on the purchase order %s has outstanding balances on sales: \n') % (debtor)
                           
             for val in residual_companies:
