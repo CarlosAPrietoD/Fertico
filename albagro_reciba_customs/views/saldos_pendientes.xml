@@ -56,7 +56,7 @@
                 <field name="date_due"/>
                 <field name="ammount_transfer"/>                   
                 <field name="ammount_compensate"/>                
-                <field name="payment_date"/>
+                <!--<field name="payment_date"/>-->
                 <field name="name"/>                             
                 <field name="residual_signed"/>                
                 <field name="state"/>
