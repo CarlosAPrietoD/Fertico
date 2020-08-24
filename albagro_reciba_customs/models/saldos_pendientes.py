@@ -20,30 +20,27 @@ class AccountInvoice(models.Model):
 
     selected_sl_inv    = fields.Boolean(string='Selected Discount') 
     assigned_pur_ord   = fields.Char(string='Assigned Purchase Order') 
-    ammount_compensate = fields.Float(string='Ammount of Selected Discounts', 
-                                      digits=dp.get_precision('Product Unit of Measure'))#, 
-                                      #compute='set_ammount_comp')
-    ammount_transfer = fields.Float(string='Ammount of Difference / Transfers', 
-                                    digits=dp.get_precision('Product Unit of Measure'))#, 
-                                    #compute='set_ammount_dif')    
+    ammount_compensate = fields.Float(string='Compensation Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_comp')
+    ammount_transfer   = fields.Float(string='Transfers Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_dif')    
                                  
+    
     def change_selected_sl_inv(self):           
         '''This method permits to change status of checkbox and assigning a purchase order'''
         if self.selected_sl_inv:
-            values = {'selected_sl_inv': False, 'assigned_pur_ord': ''}
+            values = {'selected_sl_inv': False}
             self.write(values)
         else:
-            values = {'selected_sl_inv': True, 'assigned_pur_ord': self.id}
+            values = {'selected_sl_inv': True}
             self.write(values)
 
-    '''
-    def set_ammount_comp(self):
-        #self.ammount_difference = self.ammount_sl_pending_inv - self.ammount_select_discounts
-        pass
     
+    def set_ammount_comp(self):
+        pass
+
+
     def set_ammount_dif(self):
         pass 
-    '''
+    
 
 
 class PurchaseOrder(models.Model):
@@ -52,13 +49,14 @@ class PurchaseOrder(models.Model):
     pending_sales_invoices_ids = fields.One2many('account.invoice', 'partner_id', string='Pending Sales Invoices', compute='get_invoices')   
     ammount_sl_pending_inv     = fields.Float(string='Ammount of Pedinng Sales Invoices', digits=dp.get_precision('Product Unit of Measure'), compute='sum_residual_signed') 
     ammount_select_discounts   = fields.Float(string='Ammount of Selected Discounts', digits=dp.get_precision('Product Unit of Measure'), compute='sum_select_discounts')
+    ammount_pending_difference = fields.Float(string='Ammount of Pending Difference', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_pending_difference')
 
     def get_invoices(self):       
         '''Fill new One2Many field with debted bills belonging to a client, determining its state as open:''' 
-        domain=[('state', '=', 'open'), 
-                ('partner_id', '=', self.partner_id.id),
-                '|', ('type', '=', 'in_invoice'),
-                     ('type', '=', 'in_refund')]                                                                     
+        domain =[('state', '=', 'open'), 
+                 ('partner_id', '=', self.partner_id.id),
+                  '|', ('type', '=', 'in_invoice'),
+                       ('type', '=', 'in_refund')]                                                                     
         self.pending_sales_invoices_ids = self.env['account.invoice'].search(domain)                                            
 
 
@@ -74,6 +72,18 @@ class PurchaseOrder(models.Model):
         '''Determine the ammount of selected sales invoices to charge by operator'''
         for rec in self:
             rec.ammount_select_discounts = sum(line.residual_signed for line in rec.pending_sales_invoices_ids if line.selected_sl_inv == True)
+
+
+    def set_ammount_pending_difference(self):
+        self.ammount_pending_difference = self.ammount_sl_pending_inv - self.ammount_select_discounts
+
+
+    @api.onchange('pending_sales_invoices_ids')
+    def _onchange_pending_sales_invoices_ids(self):
+        #assigned_pur_ord
+        #for rec in self:
+        #    rec.ammount_select_discounts = sum(line.residual_signed for line in rec.pending_sales_invoices_ids if line.selected_sl_inv == True)        
+        pass
 
 
     #/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
