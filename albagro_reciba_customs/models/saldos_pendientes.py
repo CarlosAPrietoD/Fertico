@@ -20,12 +20,8 @@ class AccountInvoice(models.Model):
 
     selected_sl_inv    = fields.Boolean(string='Selected Discount') 
     assigned_pur_ord   = fields.Char(string='Assigned Purchase Order') 
-    ammount_compensate = fields.Float(string='Compensation Ammount', 
-                                      digits=dp.get_precision('Product Unit of Measure')), 
-                                      compute='set_ammount_comp')
-    ammount_transfer = fields.Float(string='Transfers Ammount', 
-                                    digits=dp.get_precision('Product Unit of Measure')),
-                                    compute='set_ammount_dif')    
+    ammount_compensate = fields.Float(string='Compensation Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_comp')
+    ammount_transfer   = fields.Float(string='Transfers Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_dif')    
                                  
     
     def change_selected_sl_inv(self):           
