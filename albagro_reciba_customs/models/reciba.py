@@ -113,18 +113,7 @@ class RecibaOrder(models.Model):
     observations = fields.Text("Observations")
 
     
-    
-    product_id    = fields.Many2one('product.product', string="Product")
-    no_ticket     = fields.Char(string="No. ticket", required=True)
-    gross_weight  = fields.Float(string="Gross weight")
-    tare_weight   = fields.Float(string="Tare weight")
-    net_weight    = fields.Float(string="Net weight", compute="_get_net", store=True)
-    cycle_id      = fields.Many2one('reciba.cycle', string="Cycle")
-    customer_id   = fields.Many2one('res.partner', string="Productor name")
-    modality_id   = fields.Many2one('reciba.modality', string="Modality")
-    has_debts     = fields.Boolean(string='Does it have debts this client?', default=False)
-    error_message = fields.Text(compute='display_debts_pop_up')
-
+    #=========================Nombre que se muestra en los campos relacionados con este modelo==============
     def name_get(self):
         res=[]
         for reciba in self:
@@ -163,3 +152,14 @@ class RecibaOrder(models.Model):
             msg += _('\n\nConsider making discounts for settlement.')
             self.has_debts = True
             self.error_message = msg
+    
+    #=========================Search para encontrar el nombre en un campo relacionado=======================
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        recs = self.browse()
+        if name:
+            recs = self.search([('no_ticket', '=', name)] + args, limit=limit)
+        if not recs:
+            recs = self.search([('no_ticket', operator, name)] + args, limit=limit)
+        return recs.name_get()
