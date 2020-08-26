@@ -12,3 +12,4 @@ from . import price_list
 from . import sales_chanel
 from . import store_term
 from . import taxes
+from . import tags_domain
