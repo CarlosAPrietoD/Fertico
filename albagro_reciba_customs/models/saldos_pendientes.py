@@ -55,8 +55,8 @@ class PurchaseOrder(models.Model):
         '''Fill new One2Many field with debted bills belonging to a client, determining its state as open:''' 
         domain =[('state', '=', 'open'), 
                  ('partner_id', '=', self.partner_id.id),
-                  '|', ('type', '=', 'in_invoice'),
-                       ('type', '=', 'in_refund')]                                                                     
+                  '|', ('type', '=', 'out_invoice'),
+                       ('type', '=', 'out_refund')]                                                                     
         self.pending_sales_invoices_ids = self.env['account.invoice'].search(domain)                                            
 
 
