@@ -112,6 +112,9 @@ class RecibaOrder(models.Model):
     payment_date = fields.Date("Payment date")
     observations = fields.Text("Observations")
 
+    has_debts = fields.Boolean(string='Does it have debts this client?', default=False)
+    error_message = fields.Text(compute='display_debts_pop_up')
+
     
     #=========================Nombre que se muestra en los campos relacionados con este modelo==============
     def name_get(self):
