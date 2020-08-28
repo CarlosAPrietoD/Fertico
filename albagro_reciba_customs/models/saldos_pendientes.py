@@ -83,7 +83,7 @@ class PurchaseOrder(models.Model):
 
     @api.onchange('pending_sales_invoices_ids.selected_sl_inv')
     def _onchange_pending_sales_invoices_ids(self):        
-        _logger.info('\n\n\n  ==> Sí entra, mostrar contexto %s\n\n\n', self.env.context)
+        _logger.info('\n\n\n ==> Sí entra\n\n\n')
         #assigned_pur_ord
         for line in self.pending_sales_invoices_ids:
             if line.selected_sl_inv == True:        
