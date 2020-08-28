@@ -81,6 +81,7 @@ class PurchaseOrder(models.Model):
         self.ammount_pending_difference = self.ammount_sl_pending_inv - self.ammount_select_discounts
 
 
+    """
     @api.onchange('pending_sales_invoices_ids.selected_sl_inv')
     def _onchange_pending_sales_invoices_ids(self):        
         _logger.info('\n\n\n ==> Sí entra\n\n\n')
@@ -89,6 +90,7 @@ class PurchaseOrder(models.Model):
             if line.selected_sl_inv == True:        
                 dict_vals = {'assigned_pur_ord': self.id} 
                 line.write(dict_vals)
+    """
 
 
     #/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
