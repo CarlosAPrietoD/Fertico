@@ -132,7 +132,7 @@ class RecibaOrder(models.Model):
                          FROM account_invoice 
                         WHERE (partner_id = %s)
                           AND (state = 'open')
-                          AND (type = 'in_invoice' OR type = 'in_refund') 
+                          AND (type = 'out_invoice' OR type = 'out_refund') 
                         GROUP BY company_id;"""
                         
         self.env.cr.execute(sql_query, (self.customer_id.id,))
