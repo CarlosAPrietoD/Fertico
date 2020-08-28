@@ -80,8 +80,10 @@ class PurchaseOrder(models.Model):
 
     @api.onchange('pending_sales_invoices_ids')
     def _onchange_pending_sales_invoices_ids(self):
+        import logging; _logger = logging.getLogger(__name__)
+          _logger.info('\n\n\n sí entra, mostrar contexto %s\n\n\n', self.env.context)
         #assigned_pur_ord
-        for line in rec.pending_sales_invoices_ids:
+        for line in self.pending_sales_invoices_ids:
             if line.selected_sl_inv == True:        
                 dict_vals = {'assigned_pur_ord': self.id} 
                 line.write(dict_vals)
