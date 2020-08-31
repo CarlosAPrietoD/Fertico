@@ -12,7 +12,6 @@
                             <field name="error_message"/>
                         </div>                    
                         <group>
-                            <field name="has_debts" invisible="1"/>
                             <field name="customer_id"/>
                             <field name="no_ticket"/>
                             <field name="date"/>
