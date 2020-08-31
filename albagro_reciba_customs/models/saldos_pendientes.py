@@ -4,9 +4,6 @@ from odoo.addons import decimal_precision as dp
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
-import logging
-_logger = logging.getLogger(__name__)
-
 #\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\
 
 # Tickets de PROYECTO DE RECIBA:
@@ -20,11 +17,11 @@ _logger = logging.getLogger(__name__)
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
- 
+
     selected_sl_inv    = fields.Boolean(string='Selected Discount') 
-    seed_id            = fields.Many2one('account.invoice.line', string='Semilla/Producto', compute='set_seed')
-    ammount_compensate = fields.Float(string='Monto Compensación', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_comp')
-    ammount_transfer   = fields.Float(string='Monto Transferencia', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_trans')    
+    assigned_pur_ord   = fields.Char(string='Assigned Purchase Order') 
+    ammount_compensate = fields.Float(string='Compensation Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_comp')
+    ammount_transfer   = fields.Float(string='Transfers Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_dif')    
                                  
     
     def change_selected_sl_inv(self):           
@@ -35,25 +32,21 @@ class AccountInvoice(models.Model):
         else:
             values = {'selected_sl_inv': True}
             self.write(values)
-               
-    def set_seed(self):
-        pass
-        #self.seed_id = self.env['account.invoice.line'].search([('invoice_id', '=', self.id), limit=1]).product_id.id
 
+    
     def set_ammount_comp(self):
         pass
-        #self.ammount_compensate = self.env['purchase.order'].search([('id', '=', self.purchase_id.id)]).ammount_select_discounts
-
-    def set_ammount_trans(self):
-        pass
-        #self.ammount_transfer = self.env['purchase.order'].search([('id', '=', self.purchase_id.id)]).ammount_pending_difference
 
 
-        
+    def set_ammount_dif(self):
+        pass 
+    
+
+
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
-    
-    pending_sales_invoices_ids = fields.One2many('account.invoice', 'partner_id', string='Pending Sales Invoices', compute='get_invoices')
+
+    pending_sales_invoices_ids = fields.One2many('account.invoice', 'partner_id', string='Pending Sales Invoices', compute='get_invoices')   
     ammount_sl_pending_inv     = fields.Float(string='Ammount of Pedinng Sales Invoices', digits=dp.get_precision('Product Unit of Measure'), compute='sum_residual_signed') 
     ammount_select_discounts   = fields.Float(string='Ammount of Selected Discounts', digits=dp.get_precision('Product Unit of Measure'), compute='sum_select_discounts')
     ammount_pending_difference = fields.Float(string='Ammount of Pending Difference', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_pending_difference')
@@ -83,6 +76,17 @@ class PurchaseOrder(models.Model):
 
     def set_ammount_pending_difference(self):
         self.ammount_pending_difference = self.ammount_sl_pending_inv - self.ammount_select_discounts
+
+
+    @api.onchange('pending_sales_invoices_ids')
+    def _onchange_pending_sales_invoices_ids(self):
+        import logging; _logger = logging.getLogger(__name__)
+          _logger.info('\n\n\n sí entra, mostrar contexto %s\n\n\n', self.env.context)
+        #assigned_pur_ord
+        for line in self.pending_sales_invoices_ids:
+            if line.selected_sl_inv == True:        
+                dict_vals = {'assigned_pur_ord': self.id} 
+                line.write(dict_vals)
 
 
     #/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
