@@ -134,7 +134,8 @@ class RecibaOrder(models.Model):
         sql_query = """SELECT company_id, SUM(residual_signed) 
                          FROM account_invoice 
                         WHERE partner_id = %s
-                          AND state = 'open'                          
+                          AND state = 'open'   
+                          AND (type = 'out_invoice' OR type = 'out_refund') 
                         GROUP BY company_id;"""
                         
         self.env.cr.execute(sql_query, (self.customer_id.id,))
@@ -159,7 +160,7 @@ class RecibaOrder(models.Model):
             #Concatenate last part of error message:
             msg += _('\n\nConsider making discounts for settlement.')
             self.error_message = msg
-            _logger.info('\n\n\n self.error_message: %s\n\n\n', self.error_message)
+            _logger.info('\n\n\n self.error_message\n: %s\n\n\n', self.error_message)
     
     #=========================Search para encontrar el nombre en un campo relacionado=======================
     @api.model
