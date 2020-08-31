@@ -8,8 +8,9 @@
             <field name="arch" type="xml">
                 <form string="Reciba Form">
                     <sheet>
-                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;">
-                            <field name="error_message" attrs="{'invisible': [('has_debts','=',False)]}"/>
+                        <div class="alert alert-info" role="alert" style="margin-bottom:0px;">
+                            <p>Posibles adeudos de facturas de venta pendientes:</p>
+                            <field name="error_message"/>
                         </div>                    
                         <group>
                             <field name="has_debts" invisible="1"/>
