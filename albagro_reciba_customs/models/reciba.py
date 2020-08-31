@@ -1,6 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
+import logging
+_logger = logging.getLogger(__name__)
 
 class RecibaOrder(models.Model):
     _name = 'reciba.order'
@@ -125,17 +127,19 @@ class RecibaOrder(models.Model):
 
 
     def display_debts_pop_up(self):
+        _logger.info('\n\n\n contexto: %s\n\n\n', self.env.context)
         #Retrieve rows from "account.invoice" model where the present provider
         #is revised to detect if has open invoices indicating that must pay its debts:         
         msg = ""; summatory_residual = 0
         sql_query = """SELECT company_id, SUM(residual_signed) 
                          FROM account_invoice 
-                        WHERE (partner_id = %s)
-                          AND (state = 'open')                          
+                        WHERE partner_id = %s
+                          AND state = 'open'                          
                         GROUP BY company_id;"""
                         
         self.env.cr.execute(sql_query, (self.customer_id.id,))
-        residual_companies = self.env.cr.fetchall()        
+        residual_companies = self.env.cr.fetchall()   
+        _logger.info('\n\n\n residual_companies: %s\n\n\n', residual_companies)
 
         #Validate if query has results:
         if residual_companies:           
