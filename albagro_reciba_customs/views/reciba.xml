@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <form string="Reciba Form">
                     <sheet>
-                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('has_debts','=',False)]}">
+                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('has_debts','=',True)]}">
                             <field name="error_message"/>
                         </div>                    
                         <group>
