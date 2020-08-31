@@ -9,7 +9,6 @@
                 <form string="Reciba Form">
                     <sheet>
                         <div class="alert alert-info" role="alert" style="margin-bottom:0px;">
-                            <p>Posibles adeudos de facturas de venta pendientes:</p>
                             <field name="error_message"/>
                         </div>                    
                         <group>
