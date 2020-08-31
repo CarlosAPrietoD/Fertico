@@ -37,7 +37,7 @@ class AccountInvoice(models.Model):
             self.write(values)
             
     def set_seed(self):
-        self.seed_id = self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]).product_id.id
+        self.seed_id = self.env['account.invoice.line'].search([('invoice_id', '=', self.id), limit=1]).product_id.id
 
     def set_ammount_comp(self):
         self.ammount_compensate = self.env['purchase.order'].search([('id', '=', self.purchase_id.id)]).ammount_select_discounts
