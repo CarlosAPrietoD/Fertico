@@ -53,7 +53,9 @@
                 <field name="number"/>
                 <field name="reference"/>
                 <field name="company_id"/>
-                <field name="date_due"/>
+                <field name="date_due" position="attributes">
+                  <attribute name="string">Fecha de pago</attribute>
+                </field>              
                 <field name="ammount_transfer"/>                   
                 <field name="ammount_compensate"/>                
                 <!--<field name="payment_date"/>-->
