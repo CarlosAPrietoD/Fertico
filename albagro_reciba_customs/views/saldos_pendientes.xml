@@ -53,18 +53,26 @@
                 <field name="number"/>
                 <field name="reference"/>
                 <field name="company_id"/>
-                <field name="date_due" position="attributes">
-                  <attribute name="string">Fecha de pago</attribute>
-                </field>              
+                <field name="date_due"/>             
                 <field name="ammount_transfer"/>                   
                 <field name="ammount_compensate"/>                
-                <!--<field name="payment_date"/>-->
                 <field name="name"/>                             
                 <field name="residual_signed"/>                
                 <field name="state"/>
              </tree>
         </field>
     </record>
+    
+    <!--Override label for date_due field-->
+    <record id="view_reciba_followup_tree_2" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="albagro_reciba_customs.view_reciba_followup_tree"/>
+        <field name="arch" type="xml">  
+          <field name="date_due" position="attributes">
+            <attribute name="string">Fecha de pago</attribute>
+          </field>  
+        </field>
+    </record>          
 
     <record id="action_reciba_followup" model="ir.actions.act_window">
         <field name="name">Reciba Payments Follow-up</field>
