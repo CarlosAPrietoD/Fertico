@@ -131,8 +131,7 @@ class RecibaOrder(models.Model):
         sql_query = """SELECT company_id, SUM(residual_signed) 
                          FROM account_invoice 
                         WHERE (partner_id = %s)
-                          AND (state = 'open')
-                          AND (type = 'out_invoice' OR type = 'out_refund') 
+                          AND (state = 'open')                          
                         GROUP BY company_id;"""
                         
         self.env.cr.execute(sql_query, (self.customer_id.id,))
