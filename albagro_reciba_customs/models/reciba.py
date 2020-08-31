@@ -139,10 +139,11 @@ class RecibaOrder(models.Model):
                         
         self.env.cr.execute(sql_query, (self.customer_id.id,))
         residual_companies = self.env.cr.fetchall()   
+        self.has_debts = True
         _logger.info('\n\n\n residual_companies: %s\n\n\n', residual_companies)
 
         #Validate if query has results:
-        if not residual_companies:   
+        if self.has_debts == True:   
             _logger.info('\n\n\n sí entra \n\n\n')
             #Construct the error message, beginning with client with open sales invoices:
             debtor = self.env['res.partner'].search([('id', '=', self.customer_id.id)]).name
@@ -157,8 +158,8 @@ class RecibaOrder(models.Model):
                          
             #Concatenate last part of error message:
             msg += _('\n\nConsider making discounts for settlement.')
-            self.has_debts = True
             self.error_message = msg
+            _logger.info('\n\n\n self.error_message: %s\n\n\n', self.error_message)
     
     #=========================Search para encontrar el nombre en un campo relacionado=======================
     @api.model
