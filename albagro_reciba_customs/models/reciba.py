@@ -139,13 +139,13 @@ class RecibaOrder(models.Model):
                         GROUP BY company_id;"""
                         
         self.env.cr.execute(sql_query, (self.customer_id.id,))
-        residual_companies = self.env.cr.fetchall()   
-        self.has_debts = True
+        residual_companies = self.env.cr.fetchall()           
         _logger.info('\n\n\n residual_companies: %s\n\n\n', residual_companies)
 
         #Validate if query has results:
-        if self.has_debts == True:   
+        if residual_companies:   
             _logger.info('\n\n\n sí entra \n\n\n')
+            self.has_debts = True
             #Construct the error message, beginning with client with open sales invoices:
             debtor = self.env['res.partner'].search([('id', '=', self.customer_id.id)]).name
             msg = _('The related contact on the purchase order %s has outstanding balances on sales: \n') % (debtor)
