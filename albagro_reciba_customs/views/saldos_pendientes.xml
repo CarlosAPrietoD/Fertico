@@ -14,6 +14,7 @@
                         <tree string="Pending Sales Invoices" editable="bottom">
                             <button name="change_selected_sl_inv" type="object" string="Select"></button>
                             <field name="selected_sl_inv"/>
+                            <field name="assigned_pur_ord"/>
                             <field name="partner_id"/>
                             <field name="date_invoice"/>
                             <field name="number"/>
@@ -36,6 +37,7 @@
             </notebook>
         </field>
     </record> 
+ 
 
     <!--Add new submenu into Account > Purchase in order to display a new tree view of reciba payments follow-up-->
     <record id="view_reciba_followup_tree" model="ir.ui.view">
