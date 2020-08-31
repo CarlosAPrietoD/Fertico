@@ -22,7 +22,6 @@ class AccountInvoice(models.Model):
     _inherit = "account.invoice"
  
     selected_sl_inv    = fields.Boolean(string='Selected Discount') 
-    #assigned_pur_ord  = fields.Char(string='Assigned Purchase Order') 
     seed_id            = fields.Many2one('account.invoice.line', string='Semilla/Producto', compute='set_seed')
     ammount_compensate = fields.Float(string='Monto Compensación', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_comp')
     ammount_transfer   = fields.Float(string='Monto Transferencia', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_trans')    
@@ -81,18 +80,6 @@ class PurchaseOrder(models.Model):
 
     def set_ammount_pending_difference(self):
         self.ammount_pending_difference = self.ammount_sl_pending_inv - self.ammount_select_discounts
-
-
-    """
-    @api.onchange('pending_sales_invoices_ids.selected_sl_inv')
-    def _onchange_pending_sales_invoices_ids(self):        
-        _logger.info('\n\n\n ==> Sí entra\n\n\n')
-        #assigned_pur_ord
-        for line in self.pending_sales_invoices_ids:
-            if line.selected_sl_inv == True:        
-                dict_vals = {'assigned_pur_ord': self.id} 
-                line.write(dict_vals)
-    """
 
 
     #/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
