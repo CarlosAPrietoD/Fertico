@@ -8,16 +8,8 @@
             <field name="arch" type="xml">
                 <form string="Reciba Form">
                     <sheet>
-                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;"
-                             attrs="{'invisible': [('has_debts', '=', False)]}">
-                            <div>
-                                <field name="error_message"/>
-                            </div>
-                            <bold>
-                                <a class="alert-link" role="button">
-                                    <field name="product_id" readonly="True"/>
-                                </a>
-                            </bold>
+                        <div class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('has_debts','=',False)]}">
+                            <field name="error_message"/>
                         </div>                    
                         <group>
                             <field name="has_debts" invisible="1"/>
