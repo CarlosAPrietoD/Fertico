@@ -35,7 +35,8 @@ class AccountInvoice(models.Model):
         else:
             values = {'selected_sl_inv': True}
             self.write(values)
-            
+
+    """            
     def set_seed(self):
         self.seed_id = self.env['account.invoice.line'].search([('invoice_id', '=', self.id), limit=1]).product_id.id
 
@@ -44,13 +45,13 @@ class AccountInvoice(models.Model):
 
     def set_ammount_trans(self):
         self.ammount_transfer = self.env['purchase.order'].search([('id', '=', self.purchase_id.id)]).ammount_pending_difference
-    
+    """
 
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
-
-    pending_sales_invoices_ids = fields.One2many('account.invoice', 'partner_id', string='Pending Sales Invoices', compute='get_invoices')   
+    
+    pending_sales_invoices_ids = fields.One2many('account.invoice', 'partner_id', string='Pending Sales Invoices', compute='get_invoices')
     ammount_sl_pending_inv     = fields.Float(string='Ammount of Pedinng Sales Invoices', digits=dp.get_precision('Product Unit of Measure'), compute='sum_residual_signed') 
     ammount_select_discounts   = fields.Float(string='Ammount of Selected Discounts', digits=dp.get_precision('Product Unit of Measure'), compute='sum_select_discounts')
     ammount_pending_difference = fields.Float(string='Ammount of Pending Difference', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_pending_difference')
