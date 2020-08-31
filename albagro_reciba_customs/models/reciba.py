@@ -113,8 +113,6 @@ class RecibaOrder(models.Model):
     folio_bill = fields.Char("Folio Bill")
     payment_date = fields.Date("Payment date")
     observations = fields.Text("Observations")
-
-    has_debts = fields.Boolean(string='Does it have debts this client?', default=False)
     error_message = fields.Text(compute='display_debts_pop_up')
 
     
@@ -145,7 +143,6 @@ class RecibaOrder(models.Model):
         #Validate if query has results:
         if residual_companies:   
             _logger.info('\n\n\n sí entra \n\n\n')
-            self.has_debts = True
             #Construct the error message, beginning with client with open sales invoices:
             debtor = self.env['res.partner'].search([('id', '=', self.customer_id.id)]).name
             msg = _('The related contact on the purchase order %s has outstanding balances on sales: \n') % (debtor)
