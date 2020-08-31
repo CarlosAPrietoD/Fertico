@@ -20,11 +20,12 @@ _logger = logging.getLogger(__name__)
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
-
+ 
     selected_sl_inv    = fields.Boolean(string='Selected Discount') 
-    assigned_pur_ord   = fields.Char(string='Assigned Purchase Order') 
-    ammount_compensate = fields.Float(string='Compensation Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_comp')
-    ammount_transfer   = fields.Float(string='Transfers Ammount', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_dif')    
+    #assigned_pur_ord  = fields.Char(string='Assigned Purchase Order') 
+    seed_id            = fields.Many2one('account.invoice.line', string='Semilla/Producto', compute='set_seed')
+    ammount_compensate = fields.Float(string='Monto Compensación', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_comp')
+    ammount_transfer   = fields.Float(string='Monto Transferencia', digits=dp.get_precision('Product Unit of Measure'), compute='set_ammount_trans')    
                                  
     
     def change_selected_sl_inv(self):           
@@ -35,14 +36,15 @@ class AccountInvoice(models.Model):
         else:
             values = {'selected_sl_inv': True}
             self.write(values)
+            
+    def set_seed(self):
+        self.seed_id = self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]).product_id.id
 
-    
     def set_ammount_comp(self):
-        pass
+        self.ammount_compensate = self.env['purchase.order'].search([('id', '=', self.purchase_id)]).ammount_select_discounts
 
-
-    def set_ammount_dif(self):
-        pass 
+    def set_ammount_trans(self):
+        self.ammount_transfer = self.env['purchase.order'].search([('id', '=', self.purchase_id)]).ammount_pending_difference
     
 
 
