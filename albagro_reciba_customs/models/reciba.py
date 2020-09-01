@@ -1,6 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
+import logging
+_logger = logging.getLogger(__name__)
 
 class RecibaOrder(models.Model):
     _name = 'reciba.order'
@@ -111,8 +113,6 @@ class RecibaOrder(models.Model):
     folio_bill = fields.Char("Folio Bill")
     payment_date = fields.Date("Payment date")
     observations = fields.Text("Observations")
-
-    has_debts = fields.Boolean(string='Does it have debts this client?', default=False)
     error_message = fields.Text(compute='display_debts_pop_up')
 
     
@@ -125,21 +125,24 @@ class RecibaOrder(models.Model):
 
 
     def display_debts_pop_up(self):
+        _logger.info('\n\n\n contexto: %s\n\n\n', self.env.context)
         #Retrieve rows from "account.invoice" model where the present provider
         #is revised to detect if has open invoices indicating that must pay its debts:         
         msg = ""; summatory_residual = 0
         sql_query = """SELECT company_id, SUM(residual_signed) 
                          FROM account_invoice 
-                        WHERE (partner_id = %s)
-                          AND (state = 'open')
-                          AND (type = 'in_invoice' OR type = 'in_refund') 
+                        WHERE partner_id = %s
+                          AND state = 'open'   
+                          AND (type = 'out_invoice' OR type = 'out_refund') 
                         GROUP BY company_id;"""
                         
         self.env.cr.execute(sql_query, (self.customer_id.id,))
-        residual_companies = self.env.cr.fetchall()        
+        residual_companies = self.env.cr.fetchall()           
+        _logger.info('\n\n\n residual_companies: %s\n\n\n', residual_companies)
 
         #Validate if query has results:
-        if residual_companies:           
+        if residual_companies:   
+            _logger.info('\n\n\n sí entra \n\n\n')
             #Construct the error message, beginning with client with open sales invoices:
             debtor = self.env['res.partner'].search([('id', '=', self.customer_id.id)]).name
             msg = _('The related contact on the purchase order %s has outstanding balances on sales: \n') % (debtor)
@@ -153,8 +156,8 @@ class RecibaOrder(models.Model):
                          
             #Concatenate last part of error message:
             msg += _('\n\nConsider making discounts for settlement.')
-            self.has_debts = True
             self.error_message = msg
+            _logger.info('\n\n\n self.error_message\n: %s\n\n\n', self.error_message)
     
     #=========================Search para encontrar el nombre en un campo relacionado=======================
     @api.model
