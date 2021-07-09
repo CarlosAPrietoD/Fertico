@@ -9,3 +9,8 @@ class ResPartner(models.Model):
 
     def autocomplete(self):
         return True
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    pricelist_id_domain = fields.Integer()
