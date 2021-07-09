@@ -15,3 +15,4 @@ class SaleOrder(models.Model):
 
     pricelist_id_domain = fields.Integer()
     force = fields.Boolean()
+    payment_term_id_domain = fields.Integer()
