@@ -30,7 +30,6 @@
             <field name="name">Pre-aplicaciones</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.users</field>
-            <field name="view_type">form</field>
             <field name="domain">[]</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
@@ -52,7 +51,7 @@
             <field name="view_mode">form</field>
         </record>
 
-        <menuitem  name="Usuario v14" action="action_res_users" id="menu_res_users_migration" parent="base.menu_users" sequence="0"/>
+        <menuitem  name="Usuario v14" action="res_users_migration" id="menu_res_users_migration" parent="base.menu_users" sequence="0"/>
 
     </data>
 
