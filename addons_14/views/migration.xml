@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data>
+    <!--<data>
         <record model="ir.ui.view" id="form_res_users_migration">
             <field name="name">res.users.form</field>
             <field name="model">res.users</field>
@@ -53,6 +53,25 @@
 
         <menuitem  name="Usuario v14" action="res_users_migration" id="menu_res_users_migration" parent="base.menu_users" sequence="0"/>
 
-    </data>
+    </data>-->
+
+    
+
+    <record id="view_users_14" model="ir.ui.view">
+        <field name="name">view.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree string="Users">
+                    <field name="name"/>
+                    <field name="login"/>
+                    <field name="lang"/>
+                    <field name="login_date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>    
+            </xpath>
+        </field>
+      </record>
 
 </odoo>
