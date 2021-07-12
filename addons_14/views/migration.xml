@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem action="action_res_users" id="menu_action_res_users" parent="base.menu_users" sequence="0"/>
+
+</odoo>
