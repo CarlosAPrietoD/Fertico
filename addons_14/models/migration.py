@@ -13,9 +13,9 @@ class ResPartner(models.Model):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    pricelist_id_domain = fields.Integer()
+    pricelist_id_domain = fields.Integer(required=False)
     force = fields.Boolean()
-    payment_term_id_domain = fields.Integer()
+    payment_term_id_domain = fields.Integer(required=False)
 
 class StockLocation(models.Model):
     _inherit = 'stock.location'
@@ -26,3 +26,4 @@ class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
 
     display_sales = fields.Boolean()
+    force_term = fields.Boolean()

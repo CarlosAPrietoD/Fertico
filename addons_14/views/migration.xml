@@ -58,11 +58,6 @@
                 <xpath expr="//field[@name='payment_term_id']" position="attributes">
                     <attribute name="invisible">False</attribute>
                 </xpath>
-                <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="pricelist_id_domain" invisible="1"/>
-                    <field name="force" invisible="1"/>
-                    <field name="payment_term_id_domain" invisible="1"/>
-                </xpath>
             </field>
         </record>
 
