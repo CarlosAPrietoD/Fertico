@@ -2,27 +2,18 @@
 <odoo>
 
     <data>
-        <record model="ir.ui.view" id="form_res_users_migration">
-            <field name="name">res.users.form</field>
-            <field name="model">res.users</field>
-            <field name="arch" type="xml">
-                <form string="Pre-aplicaciones">
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
 
         <record id="tree_res_users_migration" model="ir.ui.view">
             <field name="name">res.users.tree</field>
             <field name="model">res.users</field>
             <field name="arch" type="xml">
-                <tree string="Pre-aplicaciones" delete="0" default_order="id desc">
-                    <field name="name" />
-                </tree>
+                <tree string="Users">
+                    <field name="name"/>
+                    <field name="login"/>
+                    <field name="lang"/>
+                    <field name="login_date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>   
             </field>
         </record>
 
@@ -30,7 +21,6 @@
             <field name="name">Pre-aplicaciones</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.users</field>
-            <field name="view_type">form</field>
             <field name="domain">[]</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
@@ -48,11 +38,11 @@
 
         <record id="form_res_users_migration_action" model="ir.actions.act_window.view">
             <field name="act_window_id" ref="res_users_migration" />
-            <field name="view_id" ref="form_res_users_migration" />
+            <field name="view_id" ref="base.view_users_form" />
             <field name="view_mode">form</field>
         </record>
 
-        <menuitem  name="Usuario v14" action="action_res_users" id="menu_res_users_migration" parent="base.menu_users" sequence="0"/>
+        <menuitem  name="Usuario v14" action="res_users_migration" id="menu_res_users_migration" parent="base.menu_users" sequence="0"/>
 
     </data>
 
