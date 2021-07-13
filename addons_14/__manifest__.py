@@ -32,4 +32,7 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'qweb': [
+        'static/src/xml/res_config_invite_users.xml',
+    ],
 }
