@@ -3,6 +3,8 @@
 
     <data>
 
+
+        <!--========================================Usuarios==================================-->
         <record id="tree_res_users_migration" model="ir.ui.view">
             <field name="name">res.users.tree</field>
             <field name="model">res.users</field>
@@ -43,6 +45,27 @@
         </record>
 
         <menuitem  name="Usuario v14" action="res_users_migration" id="menu_res_users_migration" parent="base.menu_users" sequence="0"/>
+
+        <!--============================================Ventas=====================================-->
+
+        <record id="view_terms_domain" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                    <attribute name="invisible">False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="invisible">False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="pricelist_id_domain" invisible="1"/>
+                    <field name="force" invisible="1"/>
+                    <field name="payment_term_id_domain" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
 
     </data>
 
