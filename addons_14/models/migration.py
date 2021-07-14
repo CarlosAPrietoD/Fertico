@@ -17,11 +17,11 @@ class SaleOrder(models.Model):
     force = fields.Boolean()
     payment_term_id_domain = fields.Integer(required=False)
 
-    api.onchange('pricelist_id')
+    @api.onchange('pricelist_id')
     def change_pricelist(self):
         self.pricelist_id_domain = self.pricelist_id.id
 
-    api.onchange('payment_term_id')
+    @api.onchange('payment_term_id')
     def change_term(self):
         self.payment_term_id_domain = self.payment_term_id.id
 
