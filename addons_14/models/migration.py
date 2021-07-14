@@ -19,11 +19,11 @@ class SaleOrder(models.Model):
 
     api.onchange('pricelist_id')
     def change_pricelist(self):
-        self.pricelist_id_domain = self.pricelist_id
+        self.pricelist_id_domain = self.pricelist_id.id
 
     api.onchange('payment_term_id')
     def change_term(self):
-        self.payment_term_id_domain = self.payment_term_id
+        self.payment_term_id_domain = self.payment_term_id.id
 
 
 class StockLocation(models.Model):
