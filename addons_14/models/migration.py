@@ -41,3 +41,8 @@ class ProductCategory(models.Model):
     _inherit = 'product.category'
 
     allow_negative_stock = fields.Boolean()
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    partner_gid = fields.Char()
