@@ -123,7 +123,7 @@ class SaleOrder(models.Model):
         invoices = self.env['account.move'].search([('partner_id','=',self.partner_id.id),('company_id','=',company),('invoice_date_due','<',now.strftime("%Y-%m-%d")),('move_type','=','out_invoice'),('state','=','posted'),'|',('payment_state','=','partial'),('payment_state','=','not_paid')])
         
         for invoice in invoices:
-            if invoice.payment_term_id.credit:
+            if invoice.invoice_payment_term_id.credit:
                 difference = now.date() - datetime.strptime(invoice.date_due, '%Y-%m-%d').date()
                 if difference.days > self.partner_id.grace_payment_days:
                     grace = False
