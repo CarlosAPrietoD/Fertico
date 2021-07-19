@@ -19,7 +19,7 @@
         <field name="inherit_id" ref="point_of_sale.view_pos_session_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='state']" position="after">
-                <field name="pos_verify" widget="badge" decoration-success="pos_verify == True"/>
+                <field name="pos_verify" widget="badge" decoration-success="pos_verify == 'verified'"/>
             </xpath>
         </field>
     </record>
