@@ -9,7 +9,7 @@
                 <field name="pos_verify" invisible="1"/>
             </xpath>
             <xpath expr="//button[@name='action_pos_session_validate']" position="after">
-                <button name="action_pos_session_verified" type="object" string="Validar" attrs="{'invisible' : [('pos_verify', '=', False)]}" class="oe_highlight" groups="point_of_sale.group_pos_manager"/>
+                <button name="action_pos_session_verified" type="object" string="Validar" attrs="{'invisible' : ['|',('pos_verify', '=', True),('state', '!=', True)]}" class="oe_highlight" groups="point_of_sale.group_pos_manager"/>
             </xpath>
         </field>
     </record>
