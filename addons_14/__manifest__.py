@@ -27,6 +27,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/migration.xml',
+        'views/pos_init.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
