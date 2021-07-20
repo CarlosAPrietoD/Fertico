@@ -14,7 +14,7 @@
 # If not, see <https://store.webkul.com/license.html/>
 ##############################################################################
 {
-    "name":  "POS Stocks",
+    "name":  "POS Stocks 14",
     "summary":  "Display Stocks inside POS. Allow/Deny"
                 " Order based on stocks.",
     "category":  "Point Of Sale",
