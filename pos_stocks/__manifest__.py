@@ -18,13 +18,9 @@
     "summary":  "Display Stocks inside POS. Allow/Deny"
                 " Order based on stocks.",
     "category":  "Point Of Sale",
-    "version":  "11.0.1.0.0",
+    "version":  "14.0",
     "sequence":  1,
-    "author":  "Webkul Software Pvt. Ltd., Vauxoo",
-    "website":  "https://store.webkul.com/Odoo-POS-Stock.html",
-    'license': 'Other proprietary',
-    "live_test_url":  "http://odoodemo.webkul.com/?module="
-                      "pos_stocks&version=10.0",
+    "author":  "Wobin",
     "depends":  ['point_of_sale'],
     "data": [
         'report/receipt_report.xml',
