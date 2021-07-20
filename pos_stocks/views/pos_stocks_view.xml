@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="wk_pos_stock_qtys" model="ir.ui.view">
+    <record id="pos_stock_qty" model="ir.ui.view">
         <field name="name">pos.config.product.form</field>
         <field name="model">pos.config</field>
         <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
         <field name="arch" type="xml">
-            <field name="journal_ids" position="after">
+            <field name="invoice_journal_id" position="after">
                 <group>
                     <group string="POS Stock" >
                         <field name="wk_display_stock" />
